@@ -32,6 +32,14 @@ object Hello extends IOApp {
   val helloRoute: HttpRoutes[IO] = Http4sServerInterpreter.toRoutes(helloEP)(helloLogic _)
   val helloService: HttpApp[IO] = helloRoute orNotFound
 
+  def countLogic(s: String): IO[Either[Unit, Int]] =
+    IO.pure(s.length().asRight[Unit])
+  val countEP: Endpoint[String, Unit, Int, Any] =
+    endpoint.in(stringBody).out(plainBody[Int])
+  val countRoutes: HttpRoutes[IO] =
+    Http4sServerInterpreter.toRoutes(countEP)(countLogic _)
+  val countService: HttpApp[IO] = countRoutes orNotFound
+
   def run(args: List[String]): IO[ExitCode] =
     BlazeServerBuilder[IO](global)
       .bindHttp(8080, "localhost")
