@@ -12,10 +12,15 @@ lazy val root = (project in file("."))
     name := "sample",
     libraryDependencies ++= Seq(
       scalaTest % Test,
+      "ch.qos.logback" % "logback-classic" % "1.2.3",
+      "org.typelevel" %% "cats-core" % "2.1.1",
+
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
-      "ch.qos.logback" % "logback-classic" % "1.2.3",
+
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % "0.17.10",
+      "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "0.17.10",
     ),
     scalacOptions ++= Seq("-Ypartial-unification"),
   )
