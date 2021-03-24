@@ -1,6 +1,6 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.12.13"
+ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "com.example"
 ThisBuild / organizationName := "example"
@@ -11,10 +11,11 @@ lazy val root = (project in file("."))
   .settings(
     name := "sample",
     libraryDependencies ++= Seq(
-      scalaTest % Test,
+      "org.scalactic" %% "scalactic" % "3.2.2",
+      "org.scalatest" %% "scalatest" % "3.2.2" % "test",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "org.typelevel" %% "cats-core" % "2.1.1",
 
+      "org.typelevel" %% "cats-core" % "2.1.1",
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
@@ -22,6 +23,6 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-core" % "0.17.10",
       "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % "0.17.10",
     ),
-    scalacOptions ++= Seq("-Ypartial-unification"),
+    scalacOptions ++= Seq("-language:postfixOps"),
   )
 
